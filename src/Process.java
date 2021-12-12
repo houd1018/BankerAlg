@@ -1,8 +1,8 @@
 class Process {
-    int processNumber;
-    int resources;
-    int[] heldResources;
-    int[] maxResources;
+    private int processNumber;
+    private int resources;
+    private int[] heldResources;
+    private int[] maxResources;
 
     Process(int[] held, int[] max, int n, int r) {
         heldResources = held;

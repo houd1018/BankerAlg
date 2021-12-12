@@ -3,16 +3,16 @@ import java.io.*;
 import java.util.ArrayList;
 
 class Banker {
-    public static final int MAX_PROCESSES = 9;
-    public static final int MAX_RESOURCES = 9;
-    static int totalSolutions = 0;
+    private static final int MAX_PROCESSES = 9;
+    private static final int MAX_RESOURCES = 9;
+    private static int totalSolutions = 0;
 
     public static void main(String[] args) {
         String fileToUse;
         // get the file name for input, either from args[] or prompt
         if (args.length == 0) { // no string entered as command line option
             Scanner inType = new Scanner(System.in);
-            System.out.printf("Enter name of file: ");
+            System.out.print("Enter name of file: ");
             fileToUse = inType.nextLine();
         } else { // file name entered as command line option
             fileToUse = args[0];
@@ -69,8 +69,8 @@ class Banker {
         }
 
         // package the data into ArrayLists for the recursion algorithm
-        ArrayList<Process> processList = new ArrayList<Process>();
-        ArrayList<Process> hist = new ArrayList<Process>();
+        ArrayList<Process> processList = new ArrayList<>();
+        ArrayList<Process> hist = new ArrayList<>();
         for (int i = 0; i < processNo; i++) {
             processList.add(processArray[i]);
         }
@@ -95,15 +95,15 @@ class Banker {
         }
     }
 
-    static void recursivelyCheck(int[] currentResources, ArrayList<Process> processes, ArrayList<Process> hist) {
+    private static void recursivelyCheck(int[] currentResources, ArrayList<Process> processes, ArrayList<Process> hist) {
         for (Process p : processes) {
             // if the process can run and there are other processes on the list that need to be run
             if (p.canRun(currentResources) && (processes.size() > 1)) {
                 int[] newResources = currentResources.clone();
                 int[] proccessResources = p.getHeldResources();
-                ArrayList<Process> newHist = new ArrayList<Process>(hist);
+                ArrayList<Process> newHist = new ArrayList<>(hist);
                 newHist.add(p);
-                ArrayList<Process> newProcesses = new ArrayList<Process>(processes);
+                ArrayList<Process> newProcesses = new ArrayList<>(processes);
                 newProcesses.remove(p);
                 for (int i = 0; i < currentResources.length; i++) {
                     newResources[i] = currentResources[i] + proccessResources[i];
@@ -114,9 +114,9 @@ class Banker {
                 hist.add(p);
                 totalSolutions += 1;
                 for (Process proc : hist) {
-                    System.out.printf("P" + Integer.toString(proc.getNameAsInt()) + " -> ");
+                    System.out.print("P" + Integer.toString(proc.getNameAsInt()) + " -> ");
                 }
-                System.out.printf("finished");
+                System.out.print("finished");
                 System.out.println();
             }
         }
