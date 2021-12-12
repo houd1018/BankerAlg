@@ -1,3 +1,5 @@
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 import java.io.*;
 import java.util.ArrayList;
@@ -62,7 +64,6 @@ class Banker {
                     j++;
                 }
                 processArray[processNo] = new Process(pHeld, pMax, processNo, currentResource);
-                //processArray[processNo].printInfo();
                 processNo += 1;
 
             }
